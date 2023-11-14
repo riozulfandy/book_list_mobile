@@ -467,7 +467,7 @@ class LeftDrawer extends StatelessWidget {
 drawer: const LeftDrawer(),
 ```
 
-<details>
+</details>
 
 <details>
     <summary>
