@@ -7,7 +7,7 @@ Berikut adalah detail pengembangan pada setiap tugas.
 
 <details>
     <summary>
-        Tugas 7
+        Tugas 8
     </summary>
 
 ## Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
