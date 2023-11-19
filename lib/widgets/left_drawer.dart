@@ -1,14 +1,18 @@
+import 'package:book_list/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:book_list/screens/menu.dart';
 // TODO: Impor halaman BookFormPage jika sudah dibuat
 import 'package:book_list/screens/booklist_form.dart';
 import 'package:book_list/screens/booklist_items.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Drawer(
       child: ListView(
         children: [
@@ -61,7 +65,7 @@ class LeftDrawer extends StatelessWidget {
               TODO: Buatlah routing ke BookFormPage di sini,
               setelah halaman BookFormPage sudah dibuat.
               */
-              Navigator.push(
+              Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                       builder: (context) => const BookFormPage()));
@@ -76,8 +80,39 @@ class LeftDrawer extends StatelessWidget {
               TODO: Buatlah routing ke BookFormPage di sini,
               setelah halaman BookFormPage sudah dibuat.
               */
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const ItemsPage()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const ItemPage()));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('Logout'),
+            tileColor: Colors.red,
+            textColor: Colors.white,
+            iconColor: Colors.white,
+            // Bagian redirection ke BookFormPage
+            onTap: () async {
+              /*
+              TODO: Buatlah routing ke BookFormPage di sini,
+              setelah halaman BookFormPage sudah dibuat.
+              */
+              final response = await request.logout(
+                  // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
+                  "http://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/logout/");
+              String message = response["message"];
+              if (response['status']) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$message Sampai jumpa."),
+                ));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$message"),
+                ));
+              }
             },
           )
         ],

@@ -1,25 +1,24 @@
 import 'dart:convert';
 
-import 'package:book_list/screens/menu.dart';
+import 'package:book_list/screens/login.dart';
 import 'package:flutter/material.dart';
 // TODO: Impor drawer yang sudah dibuat sebelumnya
-import 'package:book_list/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:book_list/screens/login.dart';
 
-class BookFormPage extends StatefulWidget {
-  const BookFormPage({super.key});
+class RegisterFormPage extends StatefulWidget {
+  const RegisterFormPage({super.key});
 
   @override
-  State<BookFormPage> createState() => _BookFormPageState();
+  State<RegisterFormPage> createState() => _RegisterFormPageState();
 }
 
-class _BookFormPageState extends State<BookFormPage> {
+class _RegisterFormPageState extends State<RegisterFormPage> {
   final _formKey = GlobalKey<FormState>();
-  String _name = "";
-  int _amount = 0;
-  String _description = "";
+  String _username = "";
+  String _password = "";
+  String _password2 = "";
+
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -27,14 +26,12 @@ class _BookFormPageState extends State<BookFormPage> {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Form Tambah Buku',
+            'Form Registrasi',
           ),
         ),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
-      // TODO: Tambahkan drawer yang sudah dibuat di sini
-      drawer: const LeftDrawer(),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -44,20 +41,20 @@ class _BookFormPageState extends State<BookFormPage> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               decoration: InputDecoration(
-                hintText: "Nama Buku",
-                labelText: "Nama Buku",
+                hintText: "Username",
+                labelText: "Username",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
                 ),
               ),
               onChanged: (String? value) {
                 setState(() {
-                  _name = value!;
+                  _username = value!;
                 });
               },
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
-                  return "Nama tidak boleh kosong!";
+                  return "Username tidak boleh kosong!";
                 }
                 return null;
               },
@@ -67,24 +64,21 @@ class _BookFormPageState extends State<BookFormPage> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               decoration: InputDecoration(
-                hintText: "Jumlah",
-                labelText: "Jumlah",
+                hintText: "Password",
+                labelText: "Password",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
                 ),
               ),
-              // TODO: Tambahkan variabel yang sesuai
+              obscureText: true,
               onChanged: (String? value) {
                 setState(() {
-                  _amount = int.parse(value!);
+                  _password = value!;
                 });
               },
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
-                  return "Jumlah tidak boleh kosong!";
-                }
-                if (int.tryParse(value) == null) {
-                  return "Jumlah harus berupa angka!";
+                  return "Password tidak boleh kosong!";
                 }
                 return null;
               },
@@ -94,21 +88,21 @@ class _BookFormPageState extends State<BookFormPage> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               decoration: InputDecoration(
-                hintText: "Deskripsi",
-                labelText: "Deskripsi",
+                hintText: "Konfirmasi Password",
+                labelText: "Konfirmasi Password",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
                 ),
               ),
+              obscureText: true,
               onChanged: (String? value) {
                 setState(() {
-                  // TODO: Tambahkan variabel yang sesuai
-                  _description = value!;
+                  _password2 = value!;
                 });
               },
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
-                  return "Deskripsi tidak boleh kosong!";
+                  return "Konfirmasi Password tidak boleh kosong!";
                 }
                 return null;
               },
@@ -120,28 +114,28 @@ class _BookFormPageState extends State<BookFormPage> {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.indigo),
+                  backgroundColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 31, 141, 29)),
                 ),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     // Kirim ke Django dan tunggu respons
                     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                     final response = await request.postJson(
-                        "http://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/create-flutter/",
+                        "http://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/create-user-flutter/",
                         jsonEncode(<String, String>{
-                          'user': user.toString(),
-                          'name': _name,
-                          'amount': _amount.toString(),
-                          'description': _description,
+                          'username': _username,
+                          'password': _password,
+                          'password2': _password2,
                           // TODO: Sesuaikan field data sesuai dengan aplikasimu
                         }));
                     if (response['status'] == 'success') {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(response['messages']),
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Berhasil mendaftar!"),
                       ));
-                      Navigator.pushReplacement(
+                      Navigator.pop(
                         context,
-                        MaterialPageRoute(builder: (context) => MyHomePage()),
+                        MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

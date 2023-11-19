@@ -14,11 +14,13 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: const Text(
-          'Book List',
-          style: TextStyle(color: Colors.white),
+        title: const Center(
+          child: Text(
+            'Book List',
+          ),
         ),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
       body: SingleChildScrollView(
