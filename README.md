@@ -38,11 +38,11 @@ Manajemen cookie umumnya digunakan untuk menyimpan informasi di sisi klien (di p
 
 Mengapa instance "CookieRequest" perlu dibagikan ke semua komponen di aplikasi Flutter, ini dapat disebabkan oleh beberapa alasan:
 
-Konsistensi Data: Dengan menggunakan instance yang dibagikan, kita dapat memastikan bahwa data cookie yang digunakan di seluruh aplikasi konsisten dan dapat diakses dengan mudah oleh setiap komponen.
+- Konsistensi Data: Dengan menggunakan instance yang dibagikan, kita dapat memastikan bahwa data cookie yang digunakan di seluruh aplikasi konsisten dan dapat diakses dengan mudah oleh setiap komponen.
 
-Pemeliharaan State Aplikasi: Jika data cookie memegang informasi otentikasi atau status sesi, memiliki instance yang dibagikan memungkinkan setiap komponen untuk merespons dengan benar terhadap perubahan status tanpa perlu berkomunikasi langsung antar komponen.
+- Pemeliharaan State Aplikasi: Jika data cookie memegang informasi otentikasi atau status sesi, memiliki instance yang dibagikan memungkinkan setiap komponen untuk merespons dengan benar terhadap perubahan status tanpa perlu berkomunikasi langsung antar komponen.
 
-Efisiensi dan Kinerja: Dengan menggunakan instance yang dibagikan, kita dapat menghindari membuat instansi baru setiap kali komponen membutuhkan akses ke data cookie. Ini dapat meningkatkan efisiensi dan kinerja aplikasi.
+- Efisiensi dan Kinerja: Dengan menggunakan instance yang dibagikan, kita dapat menghindari membuat instansi baru setiap kali komponen membutuhkan akses ke data cookie. Ini dapat meningkatkan efisiensi dan kinerja aplikasi.
 
 ## Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter!
 
@@ -437,6 +437,7 @@ class _LoginPageState extends State<LoginPage> {
 ```
 
 3. **Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.**
+
 Pada poin 1, telah ditambahkan fungsi login dan logout pada ```views.py``` aplikasi ```authentication``` django. Dengan mengakses url dari fungsi tersebut, dapat dilakukan request dari flutter ke django. Pada ```login.dart``` terdapat:
 ```dart
 final response = await request.login(
@@ -522,6 +523,7 @@ def logout(request):
 ```
 
 4. **Membuat model kustom sesuai dengan proyek aplikasi Django.**
+
 Membuat directory baru ```lib/models``` dan menambahkan file baru ```item.dart```. Mengisi file tersebut sesuai dengan json database api website kita. Menggunakan https://app.quicktype.io/ sebagai bantuan untuk generate kode dartnya.
 ```dart
 // To parse this JSON data, do
@@ -594,6 +596,7 @@ class Fields {
 }
 ```
 5. **Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy.**
+
 Memodifikasi file yang sudah dibuat sebelumnya pada ```lib/screens``` yaitu ```booklist_items.dart```. Pada tugas sebelumnya, ```booklist_items.dart``` berisi item yang disimpan dilist pada saat menambahkan item di mobile app. Sekarang, akan mengambil data dari api django web yang sudah kita buat. Serta melakukan filtering user untuk menampilkan data dari user yang sedang login saja (implementasi bonus).
 ```dart
 import 'package:flutter/material.dart';
