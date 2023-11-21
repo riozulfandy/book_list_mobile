@@ -370,7 +370,7 @@ class _LoginPageState extends State<LoginPage> {
                   // Untuk menyambungkan Android emulator dengan Django pada localhost,
                   // gunakan URL http://10.0.2.2/
                   final response = await request.login(
-                      "http://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/login/",
+                      "https://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/login/",
                       {
                         'username': username,
                         'password': password,
@@ -441,7 +441,7 @@ class _LoginPageState extends State<LoginPage> {
 Pada poin 1, telah ditambahkan fungsi login dan logout pada ```views.py``` aplikasi ```authentication``` django. Dengan mengakses url dari fungsi tersebut, dapat dilakukan request dari flutter ke django. Pada ```login.dart``` terdapat:
 ```dart
 final response = await request.login(
-"http://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/login/",
+"https://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/login/",
 {
   'username': username,
   'password': password,
@@ -484,7 +484,7 @@ flutter:
 else if (item.name == "Logout") {
   final response = await request.logout(
       // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-      "http://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/logout/");
+      "https://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/logout/");
   String message = response["message"];
   if (response['status']) {
     String uname = response["username"];
@@ -618,7 +618,7 @@ class _ItemPageState extends State<ItemPage> {
   Future<List<Item>> fetchItem() async {
     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
     var url =
-        Uri.parse('http://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/json/');
+        Uri.parse('https://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -906,7 +906,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
                     // Kirim ke Django dan tunggu respons
                     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                     final response = await request.postJson(
-                        "http://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/create-user-flutter/",
+                        "https://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/create-user-flutter/",
                         jsonEncode(<String, String>{
                           'username': _username,
                           'password': _password,

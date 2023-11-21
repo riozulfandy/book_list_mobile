@@ -17,7 +17,7 @@ class _ItemPageState extends State<ItemPage> {
   Future<List<Item>> fetchItem() async {
     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
     var url =
-        Uri.parse('http://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/json/');
+        Uri.parse('https://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},

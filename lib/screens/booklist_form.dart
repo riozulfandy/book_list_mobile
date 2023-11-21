@@ -127,7 +127,7 @@ class _BookFormPageState extends State<BookFormPage> {
                     // Kirim ke Django dan tunggu respons
                     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                     final response = await request.postJson(
-                        "http://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/create-flutter/",
+                        "https://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/create-flutter/",
                         jsonEncode(<String, String>{
                           'user': user.toString(),
                           'name': _name,

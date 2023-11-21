@@ -122,7 +122,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
                     // Kirim ke Django dan tunggu respons
                     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                     final response = await request.postJson(
-                        "http://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/create-user-flutter/",
+                        "https://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/create-user-flutter/",
                         jsonEncode(<String, String>{
                           'username': _username,
                           'password': _password,

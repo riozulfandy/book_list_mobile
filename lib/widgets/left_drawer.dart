@@ -98,7 +98,7 @@ class LeftDrawer extends StatelessWidget {
               */
               final response = await request.logout(
                   // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-                  "http://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/logout/");
+                  "https://muhammad-mariozulfandy-tugas.pbp.cs.ui.ac.id/auth/logout/");
               String message = response["message"];
               if (response['status']) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
